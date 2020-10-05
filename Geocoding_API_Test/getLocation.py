@@ -9,6 +9,8 @@ def getLocation(lat, lon):
     location = geolocator.reverse(location)
 
     if (location != None):
-	    return location.address
-	else:
-		return 1
+    	print(location.address)
+    	return location.address
+    else:
+    	print("No location found...")
+    	return 1
