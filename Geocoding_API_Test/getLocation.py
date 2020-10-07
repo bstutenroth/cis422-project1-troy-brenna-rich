@@ -13,7 +13,7 @@ def getLocation(lat, lon, my_api_key):
 
     location = str(lat) + "," + " "+str(lon)
     geolocator = GoogleV3(api_key=my_api_key) #assigns key for search
-    location = geolocator.reverse(location)
+    location = geolocator.reverse(location, True)
 
     if (location != None):
     	return location.address
