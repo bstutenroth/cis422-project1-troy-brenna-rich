@@ -7,13 +7,18 @@ def checkDirection(p1, p2, p3):
     a = p2-p1
     b = p3-p2
     turn= a[0]*b[1]-a[1]*b[0]
-    print(turn)
     if turn > 0:
         return "right"
     elif turn < 0:
         return "left"
     else:
-        return 1
+        uturn = a[0]*b[0]+a[1]*b[1]
+        if uturn > 0:
+            return "straight"
+        elif uturn < 0:
+            return "U-Turn"
+        else:
+            return "No Movement"
 
 #def checkTurn(lat1, lon1, lat2, lon2): this only checks for roads that follow lat or lon and has been removed
     """helper function to determine if a turn has been made
@@ -37,7 +42,7 @@ lat2 = "44.5873"
 lon2 = "-123.2617"
 p3=np.array([44.5873, -123.2617])
 turnlat="44.5876"
-turnlon="-123.2617"
+turnlon="-123.2617" 
 p2=np.array([44.5876,-123.2617])
 
 print (checkTurn(lat1, lon1, lat2, lon2))
@@ -48,11 +53,11 @@ lon1 = "-123.2566"
 p1= np.array([44.5876, -123.2566])
 lat2 = "44.5900"
 lon2 = "-123.2617"
-p3=np.array([44.5890, -123.2617])
+p3=np.array([44.5880, -123.2566])
 turnlat="44.5890"
 turnlon="-123.2556"
-p2=np.array([44.5890,-123.2566])
+p2=np.array([44.5880, -123.2566])
 
-print (checkTurn(lat1, lon1, lat2, lon2))
+#print (checkTurn(lat1, lon1, lat2, lon2))
 print (checkDirection(p1, p2, p3))
 """
