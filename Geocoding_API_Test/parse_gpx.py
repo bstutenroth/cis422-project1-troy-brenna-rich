@@ -1,7 +1,8 @@
 import gpxpy
 import gpxpy.gpx
 import sys
-#https://pypi.org/project/gpxpy/
+#https://pypi.org/project/gpxpy/00
+
 
 def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize):
 
@@ -35,13 +36,12 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize):
 					'''
 					
 					if (count == 2000):
-						LatitudeList.append(lat)
-						LongitudeList.append(lon)
+						LatitudeList.append(round(lat, 4))
+						LongitudeList.append(round(lon, 4))
 						listSize += 1
 						count = 0
 						#print('{0},{1}'.format(trkpt.latitude, trkpt.longitude))
 
 	except IndexError:
 		noFile = 1
-
 	return listSize
