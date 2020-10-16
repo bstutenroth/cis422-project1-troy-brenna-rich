@@ -6,82 +6,31 @@
 # the address.
 
 # Library Imports
-import urllib.request
-
+import urllib
+import geopy
 # Code Imports
 from getLocation import *
 from parse_gpx import *
 
-def main():
 
-	''' main()
+def main(input_file, api_key):
+		with open(api_key, "r") as file:
+			my_api_key = file.read().replace('\n', '')
 
-		The main method. Will take latitude, longitude inputs
-		from the user and output an address. No input
-		will close the program
-	'''
+		adresses = []
+		LatitudeList = []
+		LongitudeList = []
+		listSize = 0
+		listSize = getCoordinatesFromFile(LatitudeList, LongitudeList, listSize, input_file)
 
-	# This is the coordinate list that holds a string
-	# 'latitude,longitude' at each entry.
+		for i in range(0, listSize):
+			returnVal = getLocation(LatitudeList[i], LongitudeList[i], my_api_key)
 
-	if len(sys.argv) > 1:
-
-		# basic error handling
-		if (len(sys.argv) == 2):
-			print("Incorrect number of arguments")
-
-		elif (len(sys.argv) > 3):
-			print("Incorrect number of arguments")
-
-		else:
-			with open(sys.argv[2], "r") as file:
-				my_api_key=file.read().replace('\n','')
-
-			LatitudeList = []
-			LongitudeList = []
-			listSize = 0
-			listSize = getCoordinatesFromFile(LatitudeList,LongitudeList,listSize)
-
-			for i in range(0,listSize):
-				returnVal = getLocation(LatitudeList[i],LongitudeList[i],my_api_key)
-
-				if (returnVal == 1):
-					print("No location found")
-
-				else:
-					print(returnVal)
-
-	# this else statement shouldn't be used
-	# use the .bat file to run the program instead
-	
-	else:
-
-		done = False	
-		while not done:
-
-			my_api_key = input("Enter a valid api key: ")
-			if (my_api_key==""):
-				done = True
-				break
-
-			latitude = input("Enter latitude: ")
-			if (latitude==""):
-				done = True
+			if (returnVal == 1):
+				print("No location found")
 
 			else:
-				longitude = input("Enter longitude:")
-				if (longitude==""):
-			 		done = True
-
-				else:
-					print("Looking up location at: " + latitude + "," + longitude + " ...")
-					returnVal = getLocation(latitude,longitude)
-					if (returnVal == 1):
-						print("No Location Found")
-
-					elif (returnVal == 2):
-						print("Invalid API key")
-
-					else:
-						print(returnVal)
-main()
+				#append all locations to a list for easier flask access
+				adresses.append(returnVal)
+		#sent back to main_flask to display on display.html
+		return adresses

@@ -11,12 +11,12 @@ def getLocation(lat, lon, my_api_key):
 
     # geolocator = Nominatim(user_agent="project1") #remove comment for Nominatim
 
-    location = str(lat) + "," + " "+str(lon)
-    geolocator = GoogleV3(api_key=my_api_key) #assigns key for search
-    location = geolocator.reverse(location, True)
+    location = str(lat) + ", " +str(lon)
+    geolocator = GoogleV3(my_api_key) #assigns key for search
+    location = geolocator.reverse(location)
 
     if (location != None):
-    	return location.address
+        return location.address
 
     else:
         # no location found

@@ -3,7 +3,7 @@ import gpxpy.gpx
 import sys
 #https://pypi.org/project/gpxpy/
 
-def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize):
+def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 
 	''' Helper function to parse through a gpx file and
 		add latitude, longitude pairs to a list
@@ -15,7 +15,7 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize):
 	'''
 
 	try:
-		with open(sys.argv[1], "r") as file:
+		with open(input_file, "r") as file:
 			gpx_file = gpxpy.parse(file.read())
 
 		for trk in gpx_file.tracks:

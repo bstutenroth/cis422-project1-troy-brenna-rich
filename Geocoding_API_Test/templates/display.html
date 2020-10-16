@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <title>display page</title>
+  </head>
+  <body>
+    <h1>Your bike ride: </h1>
+    <p>
+      {% for adr in adresses %}
+        {{adr}}
+        <br/>
+      {% endfor %}
+    </p>
+  </body>
+</html>
