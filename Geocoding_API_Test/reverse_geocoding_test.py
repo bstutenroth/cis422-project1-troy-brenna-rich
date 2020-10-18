@@ -26,7 +26,7 @@ def main(input_file, api_key):
 		LongitudeList = []
 		listSize = 0
 		listSize = getCoordinatesFromFile(LatitudeList, LongitudeList, listSize, input_file)
-		print (listSize)
+		#print (listSize)
 		j=1
 		while j < listSize:
 			if (LatitudeList[j] == LatitudeList[j - 1]) and (LongitudeList[j] == LongitudeList[j-1]):
@@ -35,35 +35,34 @@ def main(input_file, api_key):
 				listSize -= 1
 			else:
 				j += 1
-		print(listSize)
+		#print(listSize)
 		start = getLocation(LatitudeList[0], LongitudeList[0], my_api_key)
 		start = start.split(",")
 		quesheet[0].append(start[0])
 		quesheet[0].append("start")
 		quesheet[0].append(distance.distance((LatitudeList[0], LongitudeList[0]), (LatitudeList[1], LongitudeList[1])).miles)
-		count=0
-		print(quesheet)
+		#print(quesheet)
 		queueplace = 0
 		for i in range (2,listSize-1):
 			test =checkDirection(np.array([LatitudeList[i-2], LongitudeList[i-2]]), np.array([LatitudeList[i], LongitudeList[i]]), np.array([LatitudeList[i+1], LongitudeList[i+1]]))
 			#print(i)
 			if test != 0:
-				print(test)
+				#print(test)
 				streetCheck= getLocation(LatitudeList[i+1], LongitudeList[i+1], my_api_key)
 				streetCheck=streetCheck.split(",")
 				streetCheck=streetCheck[0]
-				print(streetCheck)
+				#print(streetCheck)
 				if streetCheck == quesheet[queueplace][0]:
 					quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
 														(LatitudeList[i], LongitudeList[i])).miles
 				else:
-					print("new street")
+					#print("new street")
 					streetCheckNext = getLocation(LatitudeList[i], LongitudeList[i], my_api_key)
 					streetCheckNext = streetCheck.split(",")
 					streetCheckNext = streetCheckNext[0]
 					if streetCheck == streetCheckNext:
 						queueplace += 1
-						print(queueplace)
+						#print(queueplace)
 						quesheet.append([])
 						quesheet[queueplace].append(streetCheck)
 						quesheet[queueplace].append(test)
@@ -72,10 +71,8 @@ def main(input_file, api_key):
 			else:
 				quesheet[queueplace][2] += distance.distance((LatitudeList[i-1], LongitudeList[i-1]), (LatitudeList[i], LongitudeList[i])).miles
 				#print(getLocation(LatitudeList[i], LongitudeList[i], my_api_key))
-				print (test)
+				#print (test)
 
-
-		print (count)
 		print(quesheet)
 		"""
 		for i in range(0, listSize):
