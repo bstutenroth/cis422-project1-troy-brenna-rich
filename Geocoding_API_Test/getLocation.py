@@ -1,5 +1,5 @@
-from geopy.geocoders import GoogleV3
-#from geopy.geocoders import Noninatim
+#from geopy.geocoders import GoogleV3
+from geopy.geocoders import Nominatim
 
 def getLocation(lat, lon, my_api_key):
 
@@ -9,11 +9,11 @@ def getLocation(lat, lon, my_api_key):
         an api key
     """
 
-    # geolocator = Nominatim(user_agent="project1") #remove comment for Nominatim
+    geolocator = Nominatim(user_agent="project1") #remove comment for Nominatim
 
     location = str(lat) + ", " +str(lon)
-    geolocator = GoogleV3(my_api_key) #assigns key for search
-    location = geolocator.reverse(location)
+    #geolocator = GoogleV3(my_api_key) #assigns key for search
+    location = geolocator.reverse(location, addressdetails=False, zoom=16)
 
     if (location != None):
         return location.address
