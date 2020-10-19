@@ -56,6 +56,7 @@ def checkDirection(p1, p2, p3):
 
 def getdirections(LatitudeList, LongitudeList, listSize, my_api_key):
     """
+    Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
     Creates a list of streets, direction turned on to street and distance traveled on street
     """
     quesheet = [[]]  # list of lists containing, street, turn directio, distance
