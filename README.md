@@ -15,7 +15,8 @@ What we're doing:
     These addresses are then parsed and posted to display.html for
     the user to view.
 
-Installation:
+Installation: 
+
     Before running the code, make sure to have the following installed in the
     same directory as your python modules:
     (if you have pip installed, go ahead and use the below commands to install)
@@ -26,7 +27,9 @@ Installation:
     You will also need an apikey.  This must be placed into a file within the folder "Geocoding_API_Test"
     named "apikey.txt"
 
-How to use:
+
+How to Use:
+
     First, follow the installation instructions above.  Once that has been
     completed, go into the Geocoding_API_Test file and run the following in your terminal:
     if you're using Unix Bash(Linux, Mac, etc.):
