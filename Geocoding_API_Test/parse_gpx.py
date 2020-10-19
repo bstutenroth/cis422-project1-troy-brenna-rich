@@ -36,10 +36,11 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 					'''
 					
 					if (count == 2000):
-						LatitudeList.append(round(lat, 4))
-						LongitudeList.append(round(lon, 4))
-						listSize += 1
-						count = 0
+						break
+					LatitudeList.append(round(lat, 4))
+					LongitudeList.append(round(lon, 4))
+					listSize += 1
+					#count = 0
 						#print('{0},{1}'.format(trkpt.latitude, trkpt.longitude))
 
 	except IndexError:
