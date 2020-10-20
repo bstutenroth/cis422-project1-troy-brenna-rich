@@ -16,10 +16,10 @@ def getLocation(lat, lon, my_api_key):
 
     location = str(lat) + ", " + str(lon)
     # geolocator = GoogleV3(my_api_key) #assigns key for search
-    try:
-        location = geolocator.reverse(location, addressdetails=False, zoom=16)
-    except (GeocoderUnavailable, GeocoderTimedOut):
-        print("geocoder is not accepting requests,please try again later")
+    #try:
+    location = geolocator.reverse(location, addressdetails=False, zoom=17)
+    #except (GeocoderUnavailable, GeocoderTimedOut):
+    #print("geocoder is not accepting requests,please try again later")
 
     if (location != None):
         return location.address
@@ -67,12 +67,13 @@ def getdirections(LatitudeList, LongitudeList, listSize, my_api_key):
     quesheet[0].append(
         distance.distance((LatitudeList[0], LongitudeList[0]), (LatitudeList[1], LongitudeList[1])).miles)
     queueplace = 0
-    for i in range(2, listSize - 1):
-        if i % 5 == 0:
-            print("Calculating")
+    for i in range(2, listSize - 2):
+        if i % 10 == 0:
+            percentage = i/listSize
+            print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 2], LongitudeList[i - 2]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
-                              np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
+                              np.array([LatitudeList[i + 2], LongitudeList[i + 2]]))
         # print(i)
         if test != 0:
             # print(test)
