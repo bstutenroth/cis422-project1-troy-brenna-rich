@@ -35,8 +35,8 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 					200 bucks accidentally lol
 					'''
 					
-					if (count == 2000):
-						break
+					#if (count == 2000):
+						#break
 					LatitudeList.append(round(lat, 4))
 					LongitudeList.append(round(lon, 4))
 					listSize += 1
