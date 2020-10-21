@@ -10,12 +10,12 @@ import urllib
 import geopy
 from geopy import distance
 import numpy as np
+
 # Code Imports
 from getLocation import *
 from parse_gpx import *
 from checkturn import *
-
-
+from printroute import *
 
 def main(input_file, api_key):
 		with open(api_key, "r") as file:
@@ -38,6 +38,8 @@ def main(input_file, api_key):
 		#print(listSize)
 		turns=getdirections(LatitudeList, LongitudeList, listSize, my_api_key)
 		print (turns)
+		
+		PrintRoute(turns)
 		"""
 		for i in range(0, listSize):
 			returnVal = getLocation(LatitudeList[i], LongitudeList[i], my_api_key)
@@ -52,5 +54,4 @@ def main(input_file, api_key):
 		return adresses"""
 
 if __name__ == '__main__':
-	main("testfile.gpx" ,"apikey.txt")
-
+	main("uowarren.gpx" ,"apikey.txt")
