@@ -68,10 +68,16 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     quesheet[0].append(
         distance.distance((LatitudeList[0], LongitudeList[0]), (LatitudeList[1], LongitudeList[1])).miles)
     queueplace = 0
+    oldPercentage = 0
     for i in range(2, listSize - 2):
-        if i % 10 == 0:
-            percentage = i/listSize
-            print("Calculating "+str(i)+ " records") #str(round(percentage)))
+        percentage = (i/listSize) * 100
+        if (percentage != oldPercentage):
+            print(str(percentage) + " percent complete.")
+            oldPercentage = percentage
+
+        #if i % 10 == 0:
+            #percentage = i/listSize
+            #print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))

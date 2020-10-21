@@ -38,9 +38,9 @@ def main(input_file):
 		#print(listSize)
 		turns=getdirections(LatitudeList, LongitudeList, listSize)
 		#print (turns)
-		return PrintRoute(turns)
-
+		routelist = PrintRoute(turns)
+		for entry in routelist:
+			print(entry)
 
 if __name__ == '__main__':
 	main("tomodesto.gpx")
-
