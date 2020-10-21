@@ -3,7 +3,7 @@
 What we're doing:
 
     This project uses google maps api to reverse geocode.
-    The user inputs a .gpxpy file on the web service (only files
+    The user inputs a .gpx file on the web service (only files
     of this type will be allowed).  Then we take this file and run main() with that
     file as an argument.
 
