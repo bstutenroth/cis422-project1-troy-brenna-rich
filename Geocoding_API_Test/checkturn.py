@@ -72,7 +72,7 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     for i in range(2, listSize - 2):
         percentage = (i/listSize) * 100
         if (percentage != oldPercentage):
-            print(str(percentage) + " percent complete.")
+            print("{} percent complete.".format(str(round(percentage,2))), end='\r')
             oldPercentage = percentage
 
         #if i % 10 == 0:
