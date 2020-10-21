@@ -71,9 +71,9 @@ def getdirections(LatitudeList, LongitudeList, listSize, my_api_key):
         if i % 10 == 0:
             percentage = i/listSize
             print("Calculating "+str(i)+ " records") #str(round(percentage)))
-        test = checkDirection(np.array([LatitudeList[i - 2], LongitudeList[i - 2]]),
+        test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
-                              np.array([LatitudeList[i + 2], LongitudeList[i + 2]]))
+                              np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
         # print(i)
         if test != 0:
             # print(test)
