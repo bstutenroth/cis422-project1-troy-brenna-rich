@@ -14,8 +14,10 @@ def getLocation(lat, lon):
     """
 
     geolocator = Nominatim(user_agent="project1")  # remove comment for Nominatim
-    time.sleep(1)
-    location = str(lat) + ", " + str(lon)
+    location=(lat, lon)
+    reverse = RateLimiter(partial(geolocator.reverse, addressdetails=False, zoom=17), max_retries=5, min_delay_seconds=1)
+    # geolocator = GoogleV3(my_api_key) #assigns key for search
+    location=reverse(location)
     # geolocator = GoogleV3(my_api_key) #assigns key for search
     #try:
     location = geolocator.reverse(location, addressdetails=False, zoom=17)
@@ -60,7 +62,7 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
     Creates a list of streets, direction turned on to street and distance traveled on street
     """
-    quesheet = [[]]  # list of lists containing, street, turn directio, distance
+    quesheet = [[]]  # list of lists containing, street, turn direction, distance
     start = getLocation(LatitudeList[0], LongitudeList[0])
     start = start.split(",")
     quesheet[0].append(start[0])
