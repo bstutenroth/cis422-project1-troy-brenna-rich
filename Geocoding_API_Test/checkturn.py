@@ -1,5 +1,6 @@
 import numpy as np
 from geopy import distance
+import time
 #from geopy.geocoders import GoogleV3
 from geopy.geocoders import Nominatim
 
@@ -13,7 +14,7 @@ def getLocation(lat, lon, my_api_key):
     """
 
     geolocator = Nominatim(user_agent="project1")  # remove comment for Nominatim
-
+    time.sleep(1)
     location = str(lat) + ", " + str(lon)
     # geolocator = GoogleV3(my_api_key) #assigns key for search
     #try:
