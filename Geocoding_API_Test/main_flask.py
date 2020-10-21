@@ -40,7 +40,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             #run main() in reverse_geocoding_test and return results on display.html
             filename = secure_filename(file.filename)
-            return render_template('display.html', adresses = main(filename, "apikey.txt"))
+            return render_template('display.html', adresses = main(filename))
     return
 
 

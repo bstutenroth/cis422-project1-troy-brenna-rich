@@ -17,11 +17,11 @@ from parse_gpx import *
 from checkturn import *
 from printroute import *
 
-def main(input_file, api_key):
+def main(input_file):
+		'''
 		with open(api_key, "r") as file:
 			my_api_key = file.read().replace('\n', '')
-
-		adresses = []
+		'''
 		LatitudeList = []
 		LongitudeList = []
 		listSize = 0
@@ -36,22 +36,11 @@ def main(input_file, api_key):
 			else:
 				j += 1
 		#print(listSize)
-		turns=getdirections(LatitudeList, LongitudeList, listSize, my_api_key)
-		print (turns)
-		
-		PrintRoute(turns)
-		"""
-		for i in range(0, listSize):
-			returnVal = getLocation(LatitudeList[i], LongitudeList[i], my_api_key)
+		turns=getdirections(LatitudeList, LongitudeList, listSize)
+		#print (turns)
+		return PrintRoute(turns)
 
-			if (returnVal == 1):
-				print("No location found")
-
-			else:
-				#append all locations to a list for easier flask access
-				adresses.append(returnVal)
-		#sent back to main_flask to display on display.html
-		return adresses"""
 
 if __name__ == '__main__':
-	main("uowarren.gpx" ,"apikey.txt")
+	main("tomodesto.gpx")
+

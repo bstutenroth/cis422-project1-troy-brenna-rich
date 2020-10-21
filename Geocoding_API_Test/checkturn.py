@@ -6,7 +6,7 @@ from geopy.geocoders import Nominatim
 
 
 
-def getLocation(lat, lon, my_api_key):
+def getLocation(lat, lon):
     """ helper function to get address from lat and lon
 
         inputs: list of latitude numbers, list of longitude numbers,
@@ -55,13 +55,13 @@ def checkDirection(p1, p2, p3):
         else:
             return "No Movement"""
 
-def getdirections(LatitudeList, LongitudeList, listSize, my_api_key):
+def getdirections(LatitudeList, LongitudeList, listSize):
     """
     Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
     Creates a list of streets, direction turned on to street and distance traveled on street
     """
     quesheet = [[]]  # list of lists containing, street, turn directio, distance
-    start = getLocation(LatitudeList[0], LongitudeList[0], my_api_key)
+    start = getLocation(LatitudeList[0], LongitudeList[0])
     start = start.split(",")
     quesheet[0].append(start[0])
     quesheet[0].append("start")
@@ -78,7 +78,7 @@ def getdirections(LatitudeList, LongitudeList, listSize, my_api_key):
         # print(i)
         if test != 0:
             # print(test)
-            streetCheck = getLocation(LatitudeList[i + 1], LongitudeList[i + 1], my_api_key)
+            streetCheck = getLocation(LatitudeList[i + 1], LongitudeList[i + 1])
             streetCheck = streetCheck.split(",")
             streetCheck = streetCheck[0]
             # print(streetCheck)
@@ -87,7 +87,7 @@ def getdirections(LatitudeList, LongitudeList, listSize, my_api_key):
                                                              (LatitudeList[i], LongitudeList[i])).miles
             else:
                 # print("new street")
-                streetCheckNext = getLocation(LatitudeList[i], LongitudeList[i], my_api_key)
+                streetCheckNext = getLocation(LatitudeList[i], LongitudeList[i])
                 streetCheckNext = streetCheck.split(",")
                 streetCheckNext = streetCheckNext[0]
                 if streetCheck == streetCheckNext:

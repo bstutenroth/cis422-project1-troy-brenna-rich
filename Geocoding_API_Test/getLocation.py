@@ -1,7 +1,7 @@
 #from geopy.geocoders import GoogleV3
 from geopy.geocoders import Nominatim
 
-def getLocation(lat, lon, my_api_key):
+def getLocation(lat, lon):
 
     """ helper function to get address from lat and lon
         
