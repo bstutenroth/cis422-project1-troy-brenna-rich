@@ -1,9 +1,9 @@
 import numpy as np
 from geopy import distance
-import time
 #from geopy.geocoders import GoogleV3
 from geopy.geocoders import Nominatim
-
+from geopy.extra.rate_limiter import RateLimiter
+from functools import partial
 
 
 def getLocation(lat, lon):
@@ -14,14 +14,13 @@ def getLocation(lat, lon):
     """
 
     geolocator = Nominatim(user_agent="project1")  # remove comment for Nominatim
-    location=(lat, lon)
+    location = (lat, lon)
     reverse = RateLimiter(partial(geolocator.reverse, addressdetails=False, zoom=17), max_retries=5, min_delay_seconds=1)
     # geolocator = GoogleV3(my_api_key) #assigns key for search
     location=reverse(location)
     # geolocator = GoogleV3(my_api_key) #assigns key for search
     #try:
-    location = geolocator.reverse(location, addressdetails=False, zoom=17)
-    #except (GeocoderUnavailable, GeocoderTimedOut):
+        #except (GeocoderUnavailable, GeocoderTimedOut):
     #print("geocoder is not accepting requests,please try again later")
 
     if (location != None):
@@ -74,12 +73,12 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     for i in range(2, listSize - 2):
         percentage = (i/listSize) * 100
         if (percentage != oldPercentage):
-            print("{} percent complete.".format(str(round(percentage,2))), end='\r')
+            #print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
 
         #if i % 10 == 0:
             #percentage = i/listSize
-            #print("Calculating "+str(i)+ " records") #str(round(percentage)))
+         #   print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
