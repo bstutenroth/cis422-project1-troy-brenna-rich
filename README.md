@@ -53,6 +53,7 @@ How to Use:
     and get the route for your bike ride returned to you.
 
 Known Issues:
+
     Riding on unmark street or bikepath will default to closest known street. This can cause impossible routes.
     May not detect change in road name. Will show where you turned and how long you travel on said road.
     Will not detect U-turns, This can cause extended milage on road or turn direction other than expected.
