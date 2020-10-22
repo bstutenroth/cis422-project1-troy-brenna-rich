@@ -60,6 +60,7 @@ Known Issues:
     Possibility of time out from Nominatim causing incorrect routing.
 
 Future posible upgrades:
+
     Store routes and:
     Allow the user to compair routes with friends. This way they can see who does the route is the fastest time.
     Give aproximate burned callorie.
