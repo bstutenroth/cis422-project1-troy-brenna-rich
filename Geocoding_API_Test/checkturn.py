@@ -1,9 +1,11 @@
 import numpy as np
+import logging
 from geopy import distance
 #from geopy.geocoders import GoogleV3
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 from functools import partial
+
 
 
 def getLocation(lat, lon):
@@ -61,6 +63,8 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
     Creates a list of streets, direction turned on to street and distance traveled on street
     """
+    logging.basicConfig()
+    logger = logging.getLogger("geopy")
     quesheet = [[]]  # list of lists containing, street, turn direction, distance
     start = getLocation(LatitudeList[0], LongitudeList[0])
     start = start.split(",")
@@ -73,12 +77,12 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     for i in range(2, listSize - 2):
         percentage = (i/listSize) * 100
         if (percentage != oldPercentage):
-            #print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
+            print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
 
-        #if i % 10 == 0:
-            #percentage = i/listSize
-         #   print("Calculating "+str(i)+ " records") #str(round(percentage)))
+        if i % 10 == 0:
+            percentage = i/listSize
+            print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
