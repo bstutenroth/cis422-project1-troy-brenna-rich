@@ -80,9 +80,9 @@ def getdirections(LatitudeList, LongitudeList, listSize):
             print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
 
-        if i % 10 == 0:
-            percentage = i/listSize
-            print("Calculating "+str(i)+ " records") #str(round(percentage)))
+        # if i % 10 == 0:
+        #     percentage = i/listSize
+        #     print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
