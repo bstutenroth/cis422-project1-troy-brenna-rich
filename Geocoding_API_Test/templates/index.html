@@ -3,12 +3,41 @@
 <html>
   <head>
     <title>File Upload</title>
+    <style>
+        @import "https://fonts.googleapis.com/css?family=Amatic+SC ";
+        @import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Six+Caps');
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
+        html, body {margin: 0; height: 100%; overflow: hidden}
+        h1   {font-size: 400%;
+            font-family: Open Sans Condensed;
+            font-weight: bold;
+            text-align: center;
+            align-items: center;
+            align-self: center;
+            padding: 0;
+            margin: 0;
+            }
+        form    {text-align: center;
+            align-items: center;
+            align-self: center;
+            font-family: Open Sans Condensed;
+            font-size:200%}}
+        p{font-family: Open Sans Condensed;
+            font-size:200%}
+    </style>
   </head>
   <body>
-    <h1>File Upload</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
+    <div style="background-color:powderblue;">
+        <nav>
+            <h1>Track your route</h1>
+        </nav>
+        <br/>
+    </div>
+    <form id="upload-form" method="POST" action="" enctype="multipart/form-data">
+      <p>Upload a gpx file:</p>
       <p><input type="file" name="file" accept="gpx"></p>
-      <p><input type="submit" value="Submit"></p>
+      <input type="submit" value="Submit">
     </form>
   </body>
 </html>

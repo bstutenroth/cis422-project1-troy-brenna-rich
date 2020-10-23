@@ -42,6 +42,3 @@ def upload_file():
             filename = secure_filename(file.filename)
             return render_template('display.html', adresses = main(filename))
     return
-
-
-

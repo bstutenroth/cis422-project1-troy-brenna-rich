@@ -40,6 +40,7 @@ def main(input_file):
 		turns=getdirections(LatitudeList, LongitudeList, listSize)
 		#print (turns)
 		routelist = PrintRoute(turns)
+		return routelist
 		for entry in routelist:
 			print(entry)
 
