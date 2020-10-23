@@ -1,3 +1,6 @@
+# parse_gpx.py
+# Brenna Stutenroth
+
 import gpxpy
 import gpxpy.gpx
 import sys
@@ -6,7 +9,11 @@ import sys
 
 def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 
-	''' Helper function to parse through a gpx file and
+	''' 
+		getCoordinatesFromFile()
+		Authors: Brenna Stutenroth, Troy Clendenen
+
+		Helper function to parse through a gpx file and
 		add latitude, longitude pairs to a list
 
 		inputs: 2 empty lists, 0
@@ -17,7 +24,7 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 
 	try:
 		with open(input_file, "r") as file:
-			gpx_file = gpxpy.parse(file.read())
+			gpx_file = gpxpy.parse(file.read()) # parse the gpx file using gpxpy
 
 		for trk in gpx_file.tracks:
 			for trkseg in trk.segments:
@@ -27,22 +34,12 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 					lat = trkpt.latitude
 					lon = trkpt.longitude
 					#time = trkpt.time
-					#print('Latitude: {0}, Longitude: {1}, Time: {2}'.format(trkpt.latitude, trkpt.longitude, trkpt.time))
-					
-					'''
-					This if statement ensures that we aren't going over the
-					alloted calls to google maps API. I don't wanna spend
-					200 bucks accidentally lol
-					'''
-					
-					#if (count == 2000):
-						#break
-					LatitudeList.append(round(lat, 4))
-					LongitudeList.append(round(lon, 4))
-					listSize += 1
-					#count = 0
-						#print('{0},{1}'.format(trkpt.latitude, trkpt.longitude))
 
-	except IndexError:
+					LatitudeList.append(round(lat, 4)) # round the coords to a measurement
+					LongitudeList.append(round(lon, 4)) # that's reasonable
+					listSize += 1
+
+	except IndexError: # an old exception when we were using command line stuff
 		noFile = 1
+
 	return listSize

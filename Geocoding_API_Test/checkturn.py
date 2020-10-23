@@ -1,3 +1,6 @@
+# checkturn.py
+# Rich Hastings
+
 import numpy as np
 import logging
 from geopy import distance
@@ -9,6 +12,7 @@ from functools import partial
 
 
 def getLocation(lat, lon):
+
     """ helper function to get address from lat and lon
 
         inputs: list of latitude numbers, list of longitude numbers returns string for address
@@ -29,8 +33,13 @@ def getLocation(lat, lon):
 
 
 def checkDirection(p1, p2, p3):
+
     """Helper function that will check the direction of a turn using array cross multiplication
     takes 3 points in np arrays and returns string of direction turned or 0 if no turn was made"""
+    
+    #print(p1)
+    #print(p2)
+    #print(p3)
     a = p2-p1
     b = p3-p2
     
@@ -44,10 +53,12 @@ def checkDirection(p1, p2, p3):
         
 
 def getdirections(LatitudeList, LongitudeList, listSize):
+
     """
     Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
     Creates a list of streets, direction turned on to street and distance traveled on street
     """
+    
     logging.basicConfig()
     logger = logging.getLogger("geopy")
     quesheet = [[]]  # list of lists containing, street, turn direction, distance
@@ -65,9 +76,6 @@ def getdirections(LatitudeList, LongitudeList, listSize):
             print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
 
-        # if i % 10 == 0:
-        #     percentage = i/listSize
-        #     print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
@@ -101,3 +109,9 @@ def getdirections(LatitudeList, LongitudeList, listSize):
         # print (test)
 
     return quesheet
+
+'''
+help(getLocation)
+help(checkDirection)
+help(getdirections)
+'''
