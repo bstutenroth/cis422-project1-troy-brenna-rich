@@ -44,4 +44,4 @@ def main(input_file):
 			print(entry)
 
 if __name__ == '__main__':
-	main("tomodesto.gpx")
+	main("testfile.gpx")
