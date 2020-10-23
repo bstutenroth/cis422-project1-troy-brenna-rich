@@ -35,7 +35,7 @@ def getLocation(lat, lon):
 
 def checkDirection(p1, p2, p3):
 
-    """ WARNING this will not test for uturns 
+    """ WARNING this will not test for uturns
     Helper function that will check the direction of a turn using array cross multiplication
     takes 3 points in np arrays and returns string of direction turned or 0 if no turn was made
 
@@ -74,25 +74,25 @@ def getdirections(LatitudeList, LongitudeList, listSize):
         distance.distance((LatitudeList[0], LongitudeList[0]), (LatitudeList[1], LongitudeList[1])).miles)
     queueplace = 0  # location in list that most recent turn was made
     oldPercentage = 0
-    for i in range(2, listSize - 2):
+    for i in range(2, listSize - 2): # iterate through list and find turns, then check if they are valid
         percentage = (i/listSize) * 100
         if (percentage != oldPercentage):
-            #print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
+            print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
 
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
 
-        if test:
+        if test: # if a turn was detected check
             streetCheck = getLocation(LatitudeList[i + 1], LongitudeList[i + 1])
             streetCheck = streetCheck.split(",")
             streetCheck = streetCheck[0]
 
-            if streetCheck == quesheet[queueplace][0]:  # check if there was a turn or winding street.
+            if streetCheck == quesheet[queueplace][0]:  # check if there was a turn or winding street. if not update distance
                 quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
                                                              (LatitudeList[i], LongitudeList[i])).miles
-            else:
+            else: # check against next street to determine if this is a an actual turn or cross road
                 streetCheckNext = getLocation(LatitudeList[i], LongitudeList[i])
                 streetCheckNext = streetCheck.split(",")
                 streetCheckNext = streetCheckNext[0]
