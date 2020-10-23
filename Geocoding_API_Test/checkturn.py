@@ -30,7 +30,10 @@ def getLocation(lat, lon):
 
 def checkDirection(p1, p2, p3):
     """Helper function that will check the direction of a turn using array cross multiplication
-    takes 3 points in np arrays and returns string of direction turned or 0 if no turn was made"""
+    takes 3 points in np arrays and returns string of direction turned or 0 if no turn was made
+
+    future version will have an angle tolerance to check for u turn
+    """
     a = p2-p1
     b = p3-p2
     
@@ -47,48 +50,49 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     """
     Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
     Creates a list of streets, direction turned on to street and distance traveled on street
+    returns list
     """
     logging.basicConfig()
     logger = logging.getLogger("geopy")
     quesheet = [[]]  # list of lists containing, street, turn direction, distance
-    start = getLocation(LatitudeList[0], LongitudeList[0])
-    start = start.split(",")
-    quesheet[0].append(start[0])
+    start = getLocation(LatitudeList[0], LongitudeList[0])  # grab first location.
+    start = start.split(",")  # clean up returned value in future version this should be what is returned
+    quesheet[0].append(start[0])  # initialize list
     quesheet[0].append("start")
     quesheet[0].append(
         distance.distance((LatitudeList[0], LongitudeList[0]), (LatitudeList[1], LongitudeList[1])).miles)
-    queueplace = 0
+
+    queueplace = 0  # tracks where on the list to pun information
+
     oldPercentage = 0
+
     for i in range(2, listSize - 2):
+        if i%20 ==0:
+            print("processed "+ str(i)+ " records")
         percentage = (i/listSize) * 100
-        if (percentage != oldPercentage):
-            print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
+        if percentage != oldPercentage:
+            #print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
 
-        # if i % 10 == 0:
-        #     percentage = i/listSize
-        #     print("Calculating "+str(i)+ " records") #str(round(percentage)))
         test = checkDirection(np.array([LatitudeList[i - 1], LongitudeList[i - 1]]),
                               np.array([LatitudeList[i], LongitudeList[i]]),
                               np.array([LatitudeList[i + 1], LongitudeList[i + 1]]))
-        # print(i)
-        if test != 0:
-            # print(test)
+
+        if test:  # if there was a turn check street name against next name
             streetCheck = getLocation(LatitudeList[i + 1], LongitudeList[i + 1])
             streetCheck = streetCheck.split(",")
             streetCheck = streetCheck[0]
-            # print(streetCheck)
+
             if streetCheck == quesheet[queueplace][0]:
                 quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
                                                              (LatitudeList[i], LongitudeList[i])).miles
             else:
-                # print("new street")
                 streetCheckNext = getLocation(LatitudeList[i], LongitudeList[i])
                 streetCheckNext = streetCheck.split(",")
                 streetCheckNext = streetCheckNext[0]
                 if streetCheck == streetCheckNext:
                     queueplace += 1
-                    # print(queueplace)
+
                     quesheet.append([])
                     quesheet[queueplace].append(streetCheck)
                     quesheet[queueplace].append(test)
@@ -97,7 +101,5 @@ def getdirections(LatitudeList, LongitudeList, listSize):
         else:
             quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
                                                          (LatitudeList[i], LongitudeList[i])).miles
-        # print(getLocation(LatitudeList[i], LongitudeList[i], my_api_key))
-        # print (test)
 
     return quesheet
