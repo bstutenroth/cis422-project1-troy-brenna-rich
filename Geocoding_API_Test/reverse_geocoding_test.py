@@ -41,8 +41,4 @@ def main(input_file):
 		#print (turns)
 		routelist = PrintRoute(turns)
 		return routelist
-		for entry in routelist:
-			print(entry)
 
-if __name__ == '__main__':
-	main("testfile.gpx")
