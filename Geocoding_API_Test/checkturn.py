@@ -2,6 +2,7 @@
 # Rich Hastings
 
 import numpy as np
+import math
 import logging
 from geopy import distance
 #from geopy.geocoders import GoogleV3
@@ -26,11 +27,16 @@ def getLocation(lat, lon):
     location = reverse(location)
     
     if (location != None):
+        street = location.address
+        street = street.split(",")
+        street = street[0]
+        return street
         return location.address
 
     else:
         # no location found
         return 1
+
 
 
 def checkDirection(p1, p2, p3):
@@ -45,15 +51,23 @@ def checkDirection(p1, p2, p3):
 
     a = p2-p1
     b = p3-p2
-    
-    turn= a[0]*b[1]-a[1]*b[0]
-    if turn > 0:
+
+    turn = a[0]*b[1]-a[1]*b[0]
+    turn = np.math.atan2(np.linalg.det([a, b]), np.dot(a, b))
+    turn = (np.degrees(turn))
+    if abs(turn) <15:#(turn > 0 and turn<15) or (turn<0 and turn>-15):
+        #print ("no turn")
+        return 0
+    else:
+        return turn
+    """elif turn > 0:
+        print ("right")
         return "right"
     elif turn < 0:
-        return "left"
-    else:
-        return 0
-        
+        print ("left")
+        return "left"""
+
+
 
 def getdirections(LatitudeList, LongitudeList, listSize):
 
@@ -76,6 +90,7 @@ def getdirections(LatitudeList, LongitudeList, listSize):
     oldPercentage = 0
     for i in range(2, listSize - 2): # iterate through list and find turns, then check if they are valid
         percentage = (i/listSize) * 100
+
         if (percentage != oldPercentage):
             print("{} percent complete.".format(str(round(percentage, 2))), end='\r')
             oldPercentage = percentage
@@ -89,24 +104,38 @@ def getdirections(LatitudeList, LongitudeList, listSize):
             streetCheck = streetCheck.split(",")
             streetCheck = streetCheck[0]
 
-            if streetCheck == quesheet[queueplace][0]:  # check if there was a turn or winding street. if not update distance
-                quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
-                                                             (LatitudeList[i], LongitudeList[i])).miles
+            if (streetCheck == quesheet[queueplace][0]):  # check if there was a turn or winding street. if not update distance
+                if abs(test) < 130:
+                    quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
+                                                                 (LatitudeList[i], LongitudeList[i])).miles
+                else:
+                    queueplace += 1
+                    quesheet.append([])
+                    quesheet[queueplace].append(streetCheck)
+                    quesheet[queueplace].append("Uturn")
+                    quesheet[queueplace].append(0)
             else: # check against next street to determine if this is a an actual turn or cross road
                 streetCheckNext = getLocation(LatitudeList[i], LongitudeList[i])
                 streetCheckNext = streetCheck.split(",")
                 streetCheckNext = streetCheckNext[0]
+                #print (streetCheckNext)
                 if streetCheck == streetCheckNext:
                     queueplace += 1
                     quesheet.append([])
                     quesheet[queueplace].append(streetCheck)
-                    quesheet[queueplace].append(test)
+                    if test>0:
+                        quesheet[queueplace].append("Right")
+                    else:
+                        quesheet[queueplace].append("left")
                     quesheet[queueplace].append(0)
+
 
         else:
             quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
                                                          (LatitudeList[i], LongitudeList[i])).miles
+    print (quesheet)
     return quesheet
+
 
 '''
 help(getLocation)
