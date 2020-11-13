@@ -133,7 +133,7 @@ def getdirections(LatitudeList, LongitudeList, listSize):
         else:
             quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
                                                          (LatitudeList[i], LongitudeList[i])).miles
-    print (quesheet)
+    #print (quesheet)
     return quesheet
 
 

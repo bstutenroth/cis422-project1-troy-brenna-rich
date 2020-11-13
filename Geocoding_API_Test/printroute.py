@@ -25,7 +25,7 @@ def PrintRoute(routelist):
 
 		if (entry[2] != 0): # if the distance travelled != 0
 			if (currentRoad != None): # for the edge case on the first call
-				if (currentRoad[0] == entry[0]): # if the road names are equal
+				if (currentRoad[0] == entry[0]) and (entry[1] != "Uturn"): # if the road names are equal and there was no uturn
 					currentRoad[2] += entry[2] # add the distance continued on this road
 
 				else: # we add this section of the route in a readable format to our list
