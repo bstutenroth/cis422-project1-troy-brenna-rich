@@ -35,6 +35,10 @@ def index():
 def get_route():
     return render_template('get_route.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @app.route('/landing')
 def landing():
     return render_template('landing.html')
@@ -42,6 +46,10 @@ def landing():
 @app.route('/display')
 def display():
     return render_template('display.html')
+
+@app.route('/loginform')
+def loginform():
+    return render_template('loginform.html')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -73,9 +81,9 @@ def login():
     login_user = users.find_one({'name' : request.form['username']})
 
     if login_user:
-        if bcrypt.hashpw(request.form['pass'], login_user['password']) == login_user['password']:
+        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password']) == login_user['password']:
             session['username'] = request.form['username']
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
 
     return 'Invalid username/password combination'
 
@@ -89,7 +97,7 @@ def register():
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
 
         return 'That username already exists!'
 
@@ -99,7 +107,6 @@ def register():
 def logout():
     session.pop('username', None)
     return render_template('landing.html')
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

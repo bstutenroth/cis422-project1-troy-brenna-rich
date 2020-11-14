@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/static/get_route.css"/>
-  <link rel="stylesheet" href="/static/test.css"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
-  <body>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/test.css"/>
+    <link rel="stylesheet" href="/static/landing.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body id = "home_page">
     <div id = "navigation">
       <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
       <a id="nav1" href="/">HOME</a>
@@ -18,16 +18,10 @@
         <i class="material-icons">person</i>
         <div class="dropdown-content">
           <a href="/logout">Logout</a>
-          <a href="/profile">View Profile</a>
+          <a href="/profile">Profile</a>
         </div>
       </div>
     </div>
-    <h1>Your route: </h1>
-    <p>
-      {% for adr in adresses %}
-        {{adr}}
-        <br/>
-      {% endfor %}
-    </p>
+    <h1> Welcome to your profile page, {{session['username']}} </h1>
   </body>
 </html>

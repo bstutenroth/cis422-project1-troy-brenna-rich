@@ -74,6 +74,23 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   display: block;
 }
 
+.links{
+  font-size: 600%;
+  text-decoration: none;
+  text-align: center;
+}
+
+.text{
+  text-align: center;
+  margin-top: 15%;
+  font-family: Andale Mono, monospace;
+  color: #FF8C3D;
+  text-transform: uppercase;
+  position: relative;
+  word-spacing: 100vw;
+  display: block;
+}
+
 #plan_route{
   position: absolute;
   background-color: #4682B4;

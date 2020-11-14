@@ -4,24 +4,8 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/test.css"/>
+    <link rel="stylesheet" href="/static/landing.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script>
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
-      if (!e.target.matches('.material-icons')) {
-      var myDropdown = document.getElementById("myDropdown");
-        if (myDropdown.classList.contains('show')) {
-          myDropdown.classList.remove('show');
-        }
-      }
-    }
-    </script>
   </head>
   <body id = "home_page">
     <div id = "navigation">
@@ -35,7 +19,7 @@
         <i class="material-icons">person</i>
         <div class="dropdown-content">
           <a href="/logout">Logout</a>
-          <a href="#">View Profile</a>
+          <a href="/profile">View Profile</a>
         </div>
       </div>
     </div>
