@@ -2,42 +2,52 @@
 <!doctype html>
 <html>
   <head>
-    <title>File Upload</title>
-    <style>
-        @import "https://fonts.googleapis.com/css?family=Amatic+SC ";
-        @import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap');
-        @import url('https://fonts.googleapis.com/css?family=Six+Caps');
-        @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
-        html, body {margin: 0; height: 100%; overflow: hidden}
-        h1   {font-size: 400%;
-            font-family: Open Sans Condensed;
-            font-weight: bold;
-            text-align: center;
-            align-items: center;
-            align-self: center;
-            padding: 0;
-            margin: 0;
-            }
-        form    {text-align: center;
-            align-items: center;
-            align-self: center;
-            font-family: Open Sans Condensed;
-            font-size:200%}}
-        p{font-family: Open Sans Condensed;
-            font-size:200%}
-    </style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/test.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+      if (!e.target.matches('.material-icons')) {
+      var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown.classList.contains('show')) {
+          myDropdown.classList.remove('show');
+        }
+      }
+    }
+    </script>
   </head>
-  <body>
-    <div style="background-color:powderblue;">
-        <nav>
-            <h1>Track your route</h1>
-        </nav>
-        <br/>
+  <body id = "home_page">
+    <div id = "navigation">
+      <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
+      <a id="nav1" href="/">HOME</a>
+      <a id="feed">FEED</a>
+      <a id="home_title">BRT-P</a>
+      <a id = "nav2" href="https://github.com/tclendo/cis422-project1-troy-brenna-rich">GIT HUB</a>
+      <a id = "userid">{{session['username']}}</a>
+      <div class="dropdown">
+        <i class="material-icons">person</i>
+        <div class="dropdown-content">
+          <a href="/logout">Logout</a>
+          <a href="#">View Profile</a>
+        </div>
+      </div>
     </div>
-    <form id="upload-form" method="POST" action="" enctype="multipart/form-data">
-      <p>Upload a gpx file:</p>
-      <p><input type="file" name="file" accept="gpx"></p>
-      <input type="submit" value="Submit">
-    </form>
+    <a class= "links" href="/get_route">
+      <div id = "get_route">
+         <p class = "text"> GET YOUR ROUTE </p>
+      </div>
+    </a>
+    <a class = "links" href="/plan_route">
+      <div id = "plan_route">
+         <p class = "text"> PLAN YOUR ROUTE</p>
+      </div>
+    </a>
   </body>
 </html>

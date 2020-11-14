@@ -1,0 +1,39 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+#navigation{
+  font-size: 170%;
+  white-space: nowrap;
+  align-items: center;
+  align-content: center;
+  padding: 2%;
+  background-color: #4682B4;
+}
+#img2{
+  width: 100px;
+  height: 100px;
+  top: 1px;
+  position: absolute;
+  bottom: 2%;
+}
+#login{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Andale Mono, monospace;
+  font-size: 100%;
+  margin-left: 82%;
+  color: white;
+}
+#signup{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Andale Mono, monospace;
+  font-size: 100%;
+  margin-left: 3%;
+  color: white;
+}
+#img1{
+  width: 750px;
+  height: 675px;
+  position: absolute;
+  margin-left: 22%;
+  bottom: 1%;
+}

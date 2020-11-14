@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/static/get_route.css"/>
-  <link rel="stylesheet" href="/static/test.css"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/get_route.css"/>
+    <link rel="stylesheet" href="/static/test.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
   <body>
     <div id = "navigation">
       <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
@@ -22,12 +22,12 @@
         </div>
       </div>
     </div>
-    <h1>Your route: </h1>
-    <p>
-      {% for adr in adresses %}
-        {{adr}}
-        <br/>
-      {% endfor %}
-    </p>
+    <div id="drop-area">
+        <form class="my-form" method="POST" action="" enctype="multipart/form-data">
+          <p>Upload your gpx file:</p>
+          <p><input type="file" name="file" accept="gpx"></p>
+          <input type="submit" value="Submit">
+        </form>
+    </div>
   </body>
 </html>
