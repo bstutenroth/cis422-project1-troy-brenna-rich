@@ -4,12 +4,70 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/landing.css"/>
   </head>
+  <script>
+// Get the modal
+var modal = document.getElementById('id01');
+var modal2 = document.getElementById('id02');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modal2.style.display = "none";
+    }
+}
+</script>
   <body id = "home_page">
     <div id = "navigation">
       <img id = "img2" src="static/images/2.JPG">
-      <a id="login" href="/loginform">LOGIN</a>
-      <a id="signup" href="/register">SIGN UP</a>
+      <a id="login" onclick="document.getElementById('id01').style.display='block'" >LOGIN</a>
+      <a id="signup" onclick="document.getElementById('id02').style.display='block'">SIGN UP</a>
     </div>
     <img id = "img1" src="static/images/1.JPG">
+    <div id="id01" class="modal">
+      <form class="modal-content animate" method="POST" action="{{ url_for('login') }}">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+
+        <div class="container">
+          <label for="exampleInputEmail1"><b>Username</b></label>
+          <input type="text" placeholder="Username" name="username" required>
+
+          <label for="exampleInputPassword1"><b>Password</b></label>
+          <input type="password" placeholder="Password" name="pass" required>
+
+          <button type="submit">Login</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div id="id02" class="modal2">
+      <form class="modal2-content animate" method="POST" action="{{ url_for('register') }}">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+
+        <div class="container">
+          <label for="exampleInputEmail1"><b>Username</b></label>
+          <input type="text" placeholder="Username" name="username" required>
+
+          <label for="exampleInputPassword1"><b>Password</b></label>
+          <input type="password" placeholder="Password" name="pass" required>
+
+          <button type="submit">Register</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
