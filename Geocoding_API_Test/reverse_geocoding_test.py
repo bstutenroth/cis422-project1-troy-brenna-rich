@@ -10,12 +10,14 @@ import urllib
 import geopy
 from geopy import distance
 import numpy as np
+from datetime import timedelta
 
 # Code Imports
 from getLocation import *
 from parse_gpx import *
 from checkturn import *
 from printroute import *
+
 
 def main(input_file):
 	
@@ -40,8 +42,12 @@ def main(input_file):
 
 	LatitudeList = [] # list to store latitude values
 	LongitudeList = [] # list to store longitude values
+	turns = [[]]
 	listSize = 0
-	listSize = getCoordinatesFromFile(LatitudeList, LongitudeList, listSize, input_file)
+	calcount = ""
+	time = getCoordinatesFromFile(LatitudeList, LongitudeList, listSize, input_file)
+	listSize = len(LatitudeList)
+	print(time.total_seconds()//3600)
 	j=1
 	while j < listSize:
 		if (LatitudeList[j] == LatitudeList[j - 1]) and (LongitudeList[j] == LongitudeList[j-1]):
@@ -52,13 +58,26 @@ def main(input_file):
 		else:
 			j += 1
 
-	turns=getdirections(LatitudeList, LongitudeList, listSize) # construct the route as a list
+	dist=getdirections(LatitudeList, LongitudeList, listSize, turns) # construct the route as a list
+	print(dist)
 	routelist = PrintRoute(turns) # print the route
+	if time == None:
+		calcount += "Time not tracked in this GPX file we couldn't find your average speed or calorie count"
+	else:
+		hrs=time.total_seconds()/3600
+		avespeed= dist/hrs
+		calburn = time.total_seconds() // 3600 * 240
+		calcount="On this trip you traveled at an average speed of "\
+			+ str(round(avespeed, 2)) + " miles per hour\n" \
+			"You burned aproxinately " + str(calburn) + " calories"
 
+
+
+	routelist.append(calcount)
 	for entry in routelist: # print the route to the console, comment out if needed
 		print(entry)
 
 	return routelist
 
 if __name__ == "__main__":
-	main("tomodesto.gpx")
+	main("testfile.gpx")
