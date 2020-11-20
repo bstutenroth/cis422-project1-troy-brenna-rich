@@ -6,8 +6,29 @@
     <link rel="stylesheet" href="/static/test.css"/>
     <link rel="stylesheet" href="/static/landing.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
   </head>
   <body id = "home_page">
+    <script>
+      // Get the modal
+      var modal3 = document.getElementById('id03');
+      var modal4 = document.getElementById('id04');
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal3) {
+              modal3.style.display = "none";
+          }
+      }
+
+      window.onclick = function(event) {
+          if (event.target == modal4) {
+              modal4.style.display = "none";
+          }
+      }
+
+    </script>
+    <link href="/themes/COLOR/pace-theme-barber-shop.css" rel="stylesheet" />
     <div id = "navigation">
       <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
       <a id="nav1" href="/">HOME</a>
@@ -23,12 +44,50 @@
         </div>
       </div>
     </div>
-    <a class= "links" href="/get_route">
+    <div id="id03" class="modal3">
+      <form class="modal3-content animate" method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+        <div class="container">
+          <p>Name this route:</p>
+          <p><input type="text" name="route_name"></p>
+          <p>Upload your gpx file:</p>
+          <p><input type="file" name="file" accept="gpx"></p>
+          <button type="submit">Submit</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div id="id04" class="modal4">
+      <form class="modal4-content animate" method="POST" action="{{ url_for('plan_route') }}" enctype="multipart/form-data">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+        <div class="container">
+          <p>Name this route:</p>
+          <p><input type="text" name="route_name"></p>
+          <p>Enter start point:</p>
+          <p><input type="text" name="start"></p>
+          <p>Enter destination:</p>
+          <p><input type="text" name="end"></p>
+          <input type="submit" value="Submit">
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <a class= "links" onclick="document.getElementById('id03').style.display='block'">
       <div id = "get_route">
          <p class = "text"> GET YOUR ROUTE </p>
       </div>
     </a>
-    <a class = "links" href="/plan_route">
+    <a class = "links" onclick="document.getElementById('id04').style.display='block'">
       <div id = "plan_route">
          <p class = "text"> PLAN YOUR ROUTE</p>
       </div>

@@ -16,6 +16,8 @@ variables from .ini files to upper case.
 Potential extensions:
   - Use environment variables?  With what precedence relative
     to configuration files? (NO, for now)
+
+This was taken from CIS322
 """
 
 import configparser
@@ -27,7 +29,6 @@ logging.basicConfig(format='%(levelname)s:%(message)s',
 
 log = logging.getLogger(__name__)
 HERE = os.path.dirname(__file__)
-
 
 def command_line_args():
     """Returns namespace with settings from command line"""

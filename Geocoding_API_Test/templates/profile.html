@@ -23,5 +23,12 @@
       </div>
     </div>
     <h1> Welcome to your profile page, {{session['username']}} </h1>
+    <p>
+      {% for adr in adresses %}
+        {{adr}}
+        <br/>
+      {% endfor %}
+    </p>
+    <h3>{{tester}}</h3>
   </body>
 </html>

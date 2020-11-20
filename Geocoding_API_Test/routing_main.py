@@ -7,7 +7,7 @@
 from geopy.geocoders import Nominatim
 from api_keys import *
 from routing_config import *
-
+from main_flask import *
 import urllib.request
 import openrouteservice
 import json
@@ -29,7 +29,7 @@ def getWeather(coords):
 	if weather_use_boundary_box == True:
 		# boundary box for finding all cities within a square on the map.
 		# [lon-left,lat-bottom,lon-right,lat-top,zoom]
-		
+
 		bbox = [0,0,0,0,weather_zoom]
 
 		# compare coordinates so we can get our boundary box.
@@ -200,34 +200,25 @@ def printRoute(route):
 		input: json file of the route
 		outputs: none
 	'''
-
-	print("### Direcion Start ###")
-
+	route_list = []
 	if type(route) == dict:
 		directions = (route["routes"][0]["segments"][0]["steps"])
 
 		for element in directions:
-			print(element['instruction'] + " for " + str(element['distance']) + " meters.")
-	
-	else:
-		if route == 1:
-			print("Could not find route")
+			route_list.append(element['instruction'] + " for " + str(element['distance']) + " meters.")
 
-		else:
-			print("Something went wrong.")
+	return route_list
 
-	print("### Direcion End ###")
-	print()
 
-def main():
+def route_main(start, dest):
 
 	'''
 		Have the user enter 2 addresses via name,
 		and return the route between them.
 
 		Extras: Have it return information about
-		air quality in the area, choose between 
-		car/bike/walk/transit, 
+		air quality in the area, choose between
+		car/bike/walk/transit,
 	'''
 
 	geolocator = Nominatim(user_agent="project1")
@@ -239,11 +230,9 @@ def main():
 		# origin entry
 		found = False
 		while not found:
-			entry = input("Enter start point: ")
-
-			if entry != "":
-				entry.replace(" ","")
-				queryList = entry.split(",")
+			if start != "":
+				start.replace(" ","")
+				queryList = start.split(",")
 
 				location = geolocator.geocode(queryList)
 
@@ -263,11 +252,9 @@ def main():
 		# destination entry
 		found = False
 		while not found:
-			entry = input("Enter destination: ")
-
-			if entry != "":
-				entry.replace(" ","")
-				queryList = entry.split(",")
+			if dest != "":
+				dest.replace(" ","")
+				queryList = dest.split(",")
 
 				location = geolocator.geocode(queryList)
 				if location != None:
@@ -282,7 +269,7 @@ def main():
 		if (found == False):
 			done = True
 			break
-			
+
 		coords = (origin,destination) #coordinates for our route
 
 		'''
@@ -302,7 +289,8 @@ def main():
 				source: OpenWeatherMap
 
 		'''
-
+		return coords
+		'''
 		route = getRoute(coords)
 		aqi = getAQI(coords)
 		weather = getWeather(coords)
@@ -314,12 +302,12 @@ def main():
 		printRoute(route)
 		printAQI(aqi)
 		printWeather(weather)
-
+		'''
 		# end printing
 
 		#cont = input("continue? (y/n): ")
 		#if cont == 'n':
 			#done = True
-
+'''
 if __name__ == "__main__":
-	main()
+	main()'''
