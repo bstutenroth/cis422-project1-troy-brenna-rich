@@ -21,7 +21,8 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 		values, list size of both (should be the same)
 
 	'''
-
+	timelist=[]
+	totime=0
 	try:
 		with open(input_file, "r") as file:
 			gpx_file = gpxpy.parse(file.read()) # parse the gpx file using gpxpy
@@ -33,13 +34,18 @@ def getCoordinatesFromFile(LatitudeList,LongitudeList,listSize, input_file):
 					count += 1
 					lat = trkpt.latitude
 					lon = trkpt.longitude
-					#time = trkpt.time
+					time = trkpt.time
 
+					timelist.append(time)
 					LatitudeList.append(round(lat, 4)) # round the coords to a measurement
 					LongitudeList.append(round(lon, 4)) # that's reasonable
 					listSize += 1
 
 	except IndexError: # an old exception when we were using command line stuff
 		noFile = 1
-
-	return listSize
+	if timelist[0] != None:
+		totime = timelist[-1] - timelist[0]
+	else:
+		totime=None
+	#print (totime)
+	return totime

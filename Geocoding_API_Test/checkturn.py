@@ -69,17 +69,18 @@ def checkDirection(p1, p2, p3):
 
 
 
-def getdirections(LatitudeList, LongitudeList, listSize):
+def getdirections(LatitudeList, LongitudeList, listSize, quesheet):
 
     """
-    Takes a list of latitudes, longitudes, thesizeof the list and a given api key.
+    Takes a list of latitudes, longitudes, thesizeof the list and blank list of list.
     Creates a list of streets, direction turned on to street and distance traveled on street
-    Returns list
+    Returns total distance traveled
     """
     
     logging.basicConfig()
     logger = logging.getLogger("geopy")
-    quesheet = [[]]  # list of lists containing, street, turn direction, distance, then initialize with first location
+    dist=0
+    #quesheet = [[]]  # list of lists containing, street, turn direction, distance, then initialize with first location
     start = getLocation(LatitudeList[0], LongitudeList[0])
     start = start.split(",")  # will be inserted in to get location for modularity
     quesheet[0].append(start[0])
@@ -106,8 +107,10 @@ def getdirections(LatitudeList, LongitudeList, listSize):
 
             if (streetCheck == quesheet[queueplace][0]):  # check if there was a turn or winding street. if not update distance
                 if abs(test) < 130:
-                    quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
-                                                                 (LatitudeList[i], LongitudeList[i])).miles
+                    tdist = distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
+                                              (LatitudeList[i], LongitudeList[i])).miles
+                    quesheet[queueplace][2] += tdist
+                    dist += tdist
                 else:
                     queueplace += 1
                     quesheet.append([])
@@ -131,10 +134,12 @@ def getdirections(LatitudeList, LongitudeList, listSize):
 
 
         else:
-            quesheet[queueplace][2] += distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
+            tdist=distance.distance((LatitudeList[i - 1], LongitudeList[i - 1]),
                                                          (LatitudeList[i], LongitudeList[i])).miles
+            quesheet[queueplace][2] += tdist
+            dist += tdist
     #print (quesheet)
-    return quesheet
+    return dist
 
 
 '''
