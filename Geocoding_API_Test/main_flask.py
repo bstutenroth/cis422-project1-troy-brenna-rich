@@ -30,6 +30,7 @@ mongo = client.db
 #routes to the main page
 @app.route('/')
 def index():
+    #if logged in go to index otherwise go to landing
     if 'username' in session:
         return render_template('index.html')
     else:
@@ -38,9 +39,9 @@ def index():
 @app.route('/profile')
 def profile():
     users = mongo.db.users
-    li = []
     names = []
-    test = []
+    li = []
+    #get all route dictionaries that are belong to the user signed in
     for key in users.find():
         str_key = str(key)
         for i in key:
@@ -69,11 +70,13 @@ def profile():
 @app.route('/revisit/<div_key>')
 def revisit(div_key):
     users = mongo.db.users
+    #get the correct dictionary
     for key in users.find():
         str_key = str(key)
         for i in key:
             if(i == div_key):
                 try:
+                    #get all the info in the dict
                     author = key.get(i, {}).get('author', 'NA')
                     addresses = key.get(i, {}).get('adresses', 'NA')
                     profile = key.get(i, {}).get('profile', 'NA')
@@ -86,6 +89,7 @@ def revisit(div_key):
                     wind_direction = key.get(i, {}).get('wind_direction', 'NA')
                     quality = key.get(i, {}).get('quality', 'NA')
                     average_aqi = key.get(i, {}).get('average_aqi', 'NA')
+                    #display stored info on revisit.html
                     return render_template('revisit.html', profile = profile, adresses = addresses, city = city, precipitation = precipitation,
                         detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
                         wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
@@ -127,7 +131,7 @@ def upload_file():
 def plan_route():
     if request.method == 'POST':
         users = mongo.db.users
-
+        #gets all data for route
         start = request.form['start']
         dest = request.form['end']
         profile = request.form['profile']
@@ -160,7 +164,7 @@ def plan_route():
             quality = "Hazerdous"
         else:
             quality = "Extremely Hazerdous"
-
+        #if this already exists in the database, just display but don't add again
         if(users.find_one({request.form['route_name'] : {
         'author' : session['username'],
         "adresses" : printRoute(route),
@@ -178,6 +182,7 @@ def plan_route():
                 detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
                 wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
         else:
+            #insert the dictionary for the route into the database and display info
             users.insert({request.form['route_name'] : {
             'author' : session['username'],
             "adresses" : printRoute(route),
@@ -201,19 +206,19 @@ def plan_route():
 def login():
     users = mongo.db.users
     login_user = users.find_one({'name' : request.form['username']})
-
     if login_user:
         if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password']) == login_user['password']:
             session['username'] = request.form['username']
             return redirect(url_for('index'))
-
     return 'Invalid username/password combination'
+
 #register user
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
         users = mongo.db.users
         existing_user = users.find_one({'name' : request.form['username']})
+        #if user doesn't already exist add to database
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'name' : request.form['username'], 'password' : hashpass})
