@@ -1,9 +1,13 @@
+<!--
+Author: Brenna Stutenroth
+
+profile page specific to each user
+ -->
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/test.css"/>
-    <link rel="stylesheet" href="/static/landing.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body id = "home_page">
@@ -24,11 +28,12 @@
     </div>
     <h1> Welcome to your profile page, {{session['username']}} </h1>
     <p>
-      {% for adr in adresses %}
-        {{adr}}
+      {% for i in names %}
+      <div id = "square">
+        <a href="/revisit/{{i}}">{{i}}</a>
+      </div>
         <br/>
       {% endfor %}
     </p>
-    <h3>{{tester}}</h3>
   </body>
 </html>

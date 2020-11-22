@@ -1,0 +1,49 @@
+<!--
+Author: Brenna Stutenroth
+
+html paage the displays previously routed info
+-->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/static/test.css"/>
+  <link rel="stylesheet" href="/static/display.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+  <body>
+    <div id = "navigation">
+      <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
+      <a id="nav1" href="/">HOME</a>
+      <a id="feed">FEED</a>
+      <a id="home_title">BRT-P</a>
+      <a id = "nav2" href="https://github.com/tclendo/cis422-project1-troy-brenna-rich">GIT HUB</a>
+      <a id = "userid">{{session['username']}}</a>
+      <div class="dropdown">
+        <i class="material-icons">person</i>
+        <div class="dropdown-content">
+          <a href="/logout">Logout</a>
+          <a href="/profile">View Profile</a>
+        </div>
+      </div>
+    </div>
+
+    <h1>Your route:</h1>
+    <p>
+      {% for adr in adresses %}
+        {{adr}}
+        <br/>
+      {% endfor %}
+    </p>
+    <div id = "weather">
+      <p>Weather in {{city}}:</p>
+      <p>Precipitation: {{precipitation}} ({{detailed_precipitation}})</p>
+      <p>Temperature is {{temperature}} degrees</p>
+      <p>Humidity is {{humidity}}%</p>
+      <p>Wind {{wind_speed}} mph at {{wind_direction}} degrees</p>
+    </div>
+    <div id="aqi">
+      <p>AQI: {{average_aqi}}, {{quality}}</p>
+    </div>
+  </body>
+</html>

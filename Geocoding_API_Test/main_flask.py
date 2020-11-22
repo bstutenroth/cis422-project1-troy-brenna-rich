@@ -1,6 +1,10 @@
 # main_flask.py
 # Brenna Stutenroth
+'''
+Author: Brenna Stutenroth
 
+uses flask and monogdb
+'''
 import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, request, jsonify, session
 from pymongo import MongoClient
@@ -23,36 +27,82 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'some secret key'
 client = MongoClient(os.environ['DB_PORT_27017_TCP_ADDR'], 27017)
 mongo = client.db
-
+#routes to the main page
 @app.route('/')
 def index():
     if 'username' in session:
         return render_template('index.html')
     else:
         return render_template('landing.html')
-
+#when you view your profile, displays all stores routes
 @app.route('/profile')
 def profile():
     users = mongo.db.users
-    user_dbs = mongo.db[session['username']]
     li = []
-    user_db = user_dbs.find_one(session['username'])
-    for document in user_dbs.find():
-        li.append(document)
-    return render_template('profile.html', adresses = li, tester = mongo.list_collection_names())
-
+    names = []
+    test = []
+    for key in users.find():
+        str_key = str(key)
+        for i in key:
+            try:
+                author = key.get(i, {}).get('author', 'NA')
+                addresses = key.get(i, {}).get('adresses', 'NA')
+                city = key.get(i, {}).get('city', 'NA')
+                precipitation = key.get(i, {}).get('precipitation', 'NA')
+                detailed_precipitation = key.get(i, {}).get('detailed_precipitation', 'NA')
+                temperature = key.get(i, {}).get('temperature', 'NA')
+                humidity = key.get(i, {}).get('humidity', 'NA')
+                wind_speed = key.get(i, {}).get('wind_speed', 'NA')
+                wind_direction = key.get(i, {}).get('wind_direction', 'NA')
+                quality = key.get(i, {}).get('quality', 'NA')
+                average_aqi = key.get(i, {}).get('average_aqi', 'NA')
+                if(author == session['username']):
+                    li.append(key)
+                    names.append(i)
+            except AttributeError:
+                # counters is not a dictionary, ignore and move on
+                pass
+            #li.append(key.get(i, {}).get('author', 'NA'))
+    return render_template('profile.html', names = names)
+#this re-opens stored files and displays the data
+@app.route('/revisit/<div_key>')
+def revisit(div_key):
+    users = mongo.db.users
+    for key in users.find():
+        str_key = str(key)
+        for i in key:
+            if(i == div_key):
+                try:
+                    author = key.get(i, {}).get('author', 'NA')
+                    addresses = key.get(i, {}).get('adresses', 'NA')
+                    city = key.get(i, {}).get('city', 'NA')
+                    precipitation = key.get(i, {}).get('precipitation', 'NA')
+                    detailed_precipitation = key.get(i, {}).get('detailed_precipitation', 'NA')
+                    temperature = key.get(i, {}).get('temperature', 'NA')
+                    humidity = key.get(i, {}).get('humidity', 'NA')
+                    wind_speed = key.get(i, {}).get('wind_speed', 'NA')
+                    wind_direction = key.get(i, {}).get('wind_direction', 'NA')
+                    quality = key.get(i, {}).get('quality', 'NA')
+                    average_aqi = key.get(i, {}).get('average_aqi', 'NA')
+                    return render_template('revisit.html', adresses = addresses, city = city, precipitation = precipitation,
+                        detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
+                        wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
+                except AttributeError:
+                    # counters is not a dictionary, ignore and move on
+                    pass
+#landing page for if a user doesn't have an accout/isnt logged in
 @app.route('/landing')
 def landing():
     return render_template('landing.html')
-
+#displays routes
 @app.route('/display')
 def display():
     return render_template('display.html')
-
+#allows only gpx files
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+#upload gpx file
 @app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -67,16 +117,14 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            #run main() in reverse_geocoding_test and return results on display.html
             filename = secure_filename(file.filename)
             return render_template('display.html', adresses = main(filename))
     return
-
+#gets route info off of start and end point
 @app.route('/plan_route', methods=['GET', 'POST'])
 def plan_route():
     if request.method == 'POST':
         users = mongo.db.users
-        user_db = mongo[session['username']]
 
         start = request.form['start']
         dest = request.form['end']
@@ -110,7 +158,8 @@ def plan_route():
         else:
             quality = "Extremely Hazerdous"
 
-        if(user_db.find({request.form['route_name'] : {
+        if(users.find_one({request.form['route_name'] : {
+        'author' : session['username'],
         "adresses" : printRoute(route),
         "city" : city,
         "precipitation" : precipitation,
@@ -122,10 +171,11 @@ def plan_route():
         "quality" : quality,
         "average_aqi" : average_aqi}})):
             return render_template('display.html', adresses = printRoute(route), city = city, precipitation = precipitation,
-            detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
-            wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
+                detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
+                wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
         else:
-            user_db.insert({request.form['route_name'] : {
+            users.insert({request.form['route_name'] : {
+            'author' : session['username'],
             "adresses" : printRoute(route),
             "city" : city,
             "precipitation" : precipitation,
@@ -141,7 +191,7 @@ def plan_route():
             wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
     return render_template('display.html')
 
-
+#login function
 @app.route('/login', methods=['POST'])
 def login():
     users = mongo.db.users
@@ -153,7 +203,7 @@ def login():
             return redirect(url_for('index'))
 
     return 'Invalid username/password combination'
-
+#register user
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
@@ -163,11 +213,12 @@ def register():
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
+            #users.insert({session['username']+"_routes" : {}})
             return redirect(url_for('index'))
         return 'That username already exists!'
 
     return render_template('register.html')
-
+#logout function
 @app.route('/logout', methods = ['GET'])
 def logout():
     session.pop('username', None)

@@ -20,7 +20,7 @@ from printroute import *
 
 
 def main(input_file):
-	
+
 	'''
 		main()
 		Authors: Troy Clendenen, Rich Hastings
@@ -47,7 +47,7 @@ def main(input_file):
 	calcount = ""
 	time = getCoordinatesFromFile(LatitudeList, LongitudeList, listSize, input_file)
 	listSize = len(LatitudeList)
-	print(time.total_seconds()//3600)
+	#print(time.total_seconds()//3600)
 	j=1
 	while j < listSize:
 		if (LatitudeList[j] == LatitudeList[j - 1]) and (LongitudeList[j] == LongitudeList[j-1]):
@@ -59,7 +59,7 @@ def main(input_file):
 			j += 1
 
 	dist=getdirections(LatitudeList, LongitudeList, listSize, turns) # construct the route as a list
-	print(dist)
+	#print(dist)
 	routelist = PrintRoute(turns) # print the route
 	if time == None:
 		calcount += "Time not tracked in this GPX file we couldn't find your average speed or calorie count"
@@ -72,11 +72,11 @@ def main(input_file):
 			"You burned aproxinately " + str(calburn) + " calories"
 
 
-
+	'''
 	routelist.append(calcount)
 	for entry in routelist: # print the route to the console, comment out if needed
 		print(entry)
-
+	'''
 	return routelist
 
 if __name__ == "__main__":
