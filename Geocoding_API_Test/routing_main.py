@@ -169,7 +169,7 @@ def printAQI(aqi_pair):
 	print("### Air Quality Index End ###")
 	print()
 
-def getRoute(coords):
+def getRoute(coords, profile):
 
 	'''
 		getroute()
@@ -183,7 +183,7 @@ def getRoute(coords):
 
 	try:
 		client = openrouteservice.Client(key=maps_api_key)
-		routes = client.directions(coords)
+		routes = client.directions(coords, profile)
 
 	except openrouteservice.exceptions.ApiError:
 		routes = 1 # could not find route

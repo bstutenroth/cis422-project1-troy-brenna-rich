@@ -1,4 +1,8 @@
+<!--
+Author: Brenna Stutenroth
 
+The home page
+ -->
 <!doctype html>
 <html>
   <head>
@@ -28,6 +32,13 @@
       }
 
     </script>
+    <script type="text/javascript">
+      function checkForm(form)
+      {
+        form.myButton.disabled = true;
+        return true;
+      }
+    </script>
     <link href="/themes/COLOR/pace-theme-barber-shop.css" rel="stylesheet" />
     <div id = "navigation">
       <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
@@ -39,22 +50,21 @@
       <div class="dropdown">
         <i class="material-icons">person</i>
         <div class="dropdown-content">
-          <a href="/logout">Logout</a>
           <a href="/profile">View Profile</a>
+          <a href="/logout">Logout</a>
         </div>
       </div>
     </div>
     <div id="id03" class="modal3">
-      <form class="modal3-content animate" method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data">
+      <form class="modal3-content animate" method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data" onsubmit="return checkForm(this);">
         <div class="imgcontainer">
           <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
         </div>
         <div class="container">
-          <p>Name this route:</p>
-          <p><input type="text" name="route_name"></p>
           <p>Upload your gpx file:</p>
           <p><input type="file" name="file" accept="gpx"></p>
-          <button type="submit">Submit</button>
+          <p>please don't reload/exit the page after pressing submit</p>
+          <button type="submit" name= "myButton" value="submit">Submit</button>
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
@@ -70,6 +80,12 @@
         <div class="container">
           <p>Name this route:</p>
           <p><input type="text" name="route_name"></p>
+          <p>Type of transportation:</p>
+          <select name="profile">
+            <option value="driving-car">Driving</option>
+            <option value="cycling-regular">Cycling</option>
+            <option value="foot-walking">Walking</option>
+          </select>
           <p>Enter start point:</p>
           <p><input type="text" name="start"></p>
           <p>Enter destination:</p>
@@ -84,7 +100,7 @@
     </div>
     <a class= "links" onclick="document.getElementById('id03').style.display='block'">
       <div id = "get_route">
-         <p class = "text"> GET YOUR ROUTE </p>
+         <p class = "text"> ABOUT YOUR ROUTE </p>
       </div>
     </a>
     <a class = "links" onclick="document.getElementById('id04').style.display='block'">

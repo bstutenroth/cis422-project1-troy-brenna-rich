@@ -31,33 +31,20 @@ What we're doing:
 
 Installation:
 
-    Before running the code, make sure to have the following installed in the
-    same directory as your python modules:
-    (if you have pip installed, go ahead and use the below commands to install)
-    geopy : pip install geopy
-    gpxpy : pip install gpxpy
-    flask : pip install flask
-    numpy : pip install numpy
+    Before running the code, make sure to have Docker Desktop installed,
+    the rest of the needed installations will happen when you run our project
 
 How to Use:
 
-    First, follow the installation instructions above.  Once that has been
-    completed, go into the Geocoding_API_Test file and run the following in your terminal:
-    if you're using Unix Bash(Linux, Mac, etc.):
-        $ export FLASK_APP=main_flask.py
-        $ flask run
-    If you're using Windows CMD:
-        > set FLASK_APP=main_flask
-        > flask run
-    If you're using Windows Powershell:
-        > $env:FLASK_APP = "main_flask"
-        > flask run
-    Then follow the provided link to the webpage.  Here, you can upload your gpx file
-    and get the route for your bike ride returned to you.
+    In order to run, make sure docker desktop is open, and running.
+    Then, make sure you're in the right directory (inside the 'Geocoding_API_Test' folder)
 
-    (Alternatively, on Windows, if you have all of the modules installed, we haven't streamlined this way of using, but in "reverse_geocoding_test.py", if you change the name of the gpx file at the bottom when it calls main(<gpxfilename>) to a gpx
-    file in the current folder, press Run Test.bat, and it will find the route
-    in the command line. A bash version of this same script is planned for future testing.)
+    Then type the following commands in your terminal:
+
+    docker-compose build
+    docker-compose up
+
+    After this, just open up your browser and enter "http://localhost:5000/" to access our website
 
 Known Issues:
 

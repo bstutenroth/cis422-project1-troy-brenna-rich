@@ -1,23 +1,6 @@
 """
-Configure from
-   app.ini (if provided)
-   credentials.ini
-   command line  (unless invoked with proxied=True)
-in that order (i.e., in opposite order of precedence).
-
-A configuration namespace module returned by this module is
-suitable for configuring a Flask applicaton object.
-
-configparser makes all configuration variables  lower case;
-Flask configuration object recognizes only upper case configuration
-variables.  To resolve this conflict, we convert all configuration
-variables from .ini files to upper case.
-
-Potential extensions:
-  - Use environment variables?  With what precedence relative
-    to configuration files? (NO, for now)
-
-This was taken from CIS322
+Brenna Stutenroth
+This code was taken from an old CIS 322 project
 """
 
 import configparser

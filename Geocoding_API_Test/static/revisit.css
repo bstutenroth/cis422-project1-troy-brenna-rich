@@ -3,7 +3,7 @@ Author: Brenna Stutenroth
 
 
 */
-html, body {margin: 0; height: 100%; overflow: hidden}
+html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
 
 #navigation{
   font-size: 170%;
@@ -11,7 +11,6 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   align-items: center;
   align-content: center;
   padding: 1%;
-  background-color: #4682B4;
 }
 #img2{
   width: 100px;
@@ -25,14 +24,15 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   font-family: Andale Mono, monospace;
   font-size: 90%;
   margin-left: 10%;
-  color: white;
+  color: #4682B4;
   margin-top: 0px;
   top: 0px;
 }
+
 .material-icons{
   color: white;
   margin-left: 1%;
-  color: white;
+  color: #4682B4;
   border: none;
 }
 #home_title{
@@ -48,7 +48,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   font-family: Andale Mono, monospace;
   font-size: 100%;
   margin-left: 9%;
-  color: white;
+  color: #4682B4;
 }
 #nav1{
   text-transform: uppercase;
@@ -64,7 +64,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   text-decoration: none;
   font-family: Andale Mono, monospace;
   margin-left: 14%;
-  color: white;
+  color: #4682B4;
 }
 #get_route{
   position: absolute;
@@ -141,24 +141,122 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #FF8C3D;}
 
-@keyframes page-load {
-    from {
-        background-color: #ffc422;
-    }
-    to {
-        background-color: #c0392b;
-    }
+#navigation{
+  font-size: 170%;
+  white-space: nowrap;
+  align-items: center;
+  align-content: center;
+  padding: 1%;
+  background-color: #4682B4;
 }
-.page-loading::before {
-    content:" ";
-    display:block;
-    position:fixed;
-    z-index:10;
-    height:2px;
-    width:100%;
-    top:0;
-    left:0;
-    background-color:#06D;
-    animation: page-load infinite ease-out 2s;
-    box-shadow:0 2px 2px rgba(0,0,0,.2);
+#img2{
+  width: 100px;
+  height: 100px;
+  top: 1px;
+  position: absolute;
+}
+#userid{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Andale Mono, monospace;
+  font-size: 90%;
+  margin-left: 10%;
+  color: white;
+  margin-top: 0px;
+  top: 0px;
+}
+.material-icons{
+  color: white;
+  margin-left: 1%;
+  color: white;
+  border: none;
+}
+#home_title{
+  margin-left: 8%;
+  font-size: 150%;
+  color: #AFEEEE;
+  font-family: Andale Mono, monospace;
+  margin-left: 8%;
+}
+#nav2{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Andale Mono, monospace;
+  font-size: 100%;
+  margin-left: 5%;
+  color: white;
+}
+#nav1{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Andale Mono, monospace;
+  font-size: 100%;
+  margin-left: 8%;
+  color: white;
+}
+#feed{
+  text-transform: uppercase;
+  font-size: 100%;
+  text-decoration: none;
+  font-family: Andale Mono, monospace;
+  margin-left: 10%;
+  color: white;
+}
+#get_route{
+  position: absolute;
+  background-color: #4682B4;
+  align-content: center;
+  margin-left: 53%;
+  margin-top: 5%;
+  max-width: 30%;
+  max-height: 65%;
+  width: 30%;
+  height: auto;
+  display: block;
+}
+
+.links{
+  font-size: 600%;
+  text-decoration: none;
+  text-align: center;
+}
+
+.text{
+  text-align: center;
+  margin-top: 15%;
+  font-family: Andale Mono, monospace;
+  color: #FF8C3D;
+  text-transform: uppercase;
+  position: relative;
+  word-spacing: 100vw;
+  display: block;
+}
+
+#plan_route{
+  position: absolute;
+  background-color: #4682B4;
+  align-content: center;
+  margin-left: 17%;
+  margin-top: 5%;
+  max-width: 30%;
+  max-height: 65%;
+  width: 30%;
+  height: auto;
+}
+#addr_div{
+  overflow: scroll;
+  font-family: Andale Mono, monospace;
+  width: 50%;
+  height: 85%;
+  margin-left: 5%;
+  font-size: 150%;
+  position: absolute;
+}
+#weather{
+  margin-left: 75%;
+  font-family: Andale Mono, monospace;
+  width: 20%;
+  height: 30%;
+  font-size: 150%;
+  position: absolute;
 }

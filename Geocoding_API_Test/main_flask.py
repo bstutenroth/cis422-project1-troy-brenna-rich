@@ -47,6 +47,7 @@ def profile():
             try:
                 author = key.get(i, {}).get('author', 'NA')
                 addresses = key.get(i, {}).get('adresses', 'NA')
+                profile = key.get(i, {}).get('profile', 'NA')
                 city = key.get(i, {}).get('city', 'NA')
                 precipitation = key.get(i, {}).get('precipitation', 'NA')
                 detailed_precipitation = key.get(i, {}).get('detailed_precipitation', 'NA')
@@ -75,6 +76,7 @@ def revisit(div_key):
                 try:
                     author = key.get(i, {}).get('author', 'NA')
                     addresses = key.get(i, {}).get('adresses', 'NA')
+                    profile = key.get(i, {}).get('profile', 'NA')
                     city = key.get(i, {}).get('city', 'NA')
                     precipitation = key.get(i, {}).get('precipitation', 'NA')
                     detailed_precipitation = key.get(i, {}).get('detailed_precipitation', 'NA')
@@ -84,7 +86,7 @@ def revisit(div_key):
                     wind_direction = key.get(i, {}).get('wind_direction', 'NA')
                     quality = key.get(i, {}).get('quality', 'NA')
                     average_aqi = key.get(i, {}).get('average_aqi', 'NA')
-                    return render_template('revisit.html', adresses = addresses, city = city, precipitation = precipitation,
+                    return render_template('revisit.html', profile = profile, adresses = addresses, city = city, precipitation = precipitation,
                         detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
                         wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
                 except AttributeError:
@@ -128,8 +130,9 @@ def plan_route():
 
         start = request.form['start']
         dest = request.form['end']
+        profile = request.form['profile']
         coords = route_main(start, dest)
-        route = getRoute(coords)
+        route = getRoute(coords,profile)
         forecast = getWeather(coords)
         aqi_pair = getAQI(coords)
         city = forecast["name"]
@@ -161,6 +164,7 @@ def plan_route():
         if(users.find_one({request.form['route_name'] : {
         'author' : session['username'],
         "adresses" : printRoute(route),
+        "profile" : profile,
         "city" : city,
         "precipitation" : precipitation,
         "detailed_precipitation" : detailed_precipitation,
@@ -170,13 +174,14 @@ def plan_route():
         "wind_direction" : str(wind_direction),
         "quality" : quality,
         "average_aqi" : average_aqi}})):
-            return render_template('display.html', adresses = printRoute(route), city = city, precipitation = precipitation,
+            return render_template('display.html', profile = profile, adresses = printRoute(route), city = city, precipitation = precipitation,
                 detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
                 wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
         else:
             users.insert({request.form['route_name'] : {
             'author' : session['username'],
             "adresses" : printRoute(route),
+            "profile" : profile,
             "city" : city,
             "precipitation" : precipitation,
             "detailed_precipitation" : detailed_precipitation,
@@ -186,7 +191,7 @@ def plan_route():
             "wind_direction" : str(wind_direction),
             "quality" : quality,
             "average_aqi" : average_aqi}})
-            return render_template('display.html', adresses = printRoute(route), city = city, precipitation = precipitation,
+            return render_template('display.html', profile = profile, adresses = printRoute(route), city = city, precipitation = precipitation,
             detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
             wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)
     return render_template('display.html')
