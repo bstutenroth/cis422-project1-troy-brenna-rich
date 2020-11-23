@@ -30,9 +30,19 @@ What we're doing:
     the user to view.
 
 Installation:
-
+    
+    This project has been optomized for usage with docker.
     Before running the code, make sure to have Docker Desktop installed,
-    the rest of the needed installations will happen when you run our project
+    the rest of the needed installations will happen when you run our project.
+    
+    If you are not using docker you will have to have the following installed:
+    Python 3
+    pymongo
+    geopy
+    numpy
+    gpxpy
+    flask_bcrypt
+    openrouteservice
 
 How to Use:
 
@@ -50,7 +60,6 @@ Known Issues:
 
     Riding on unmark street or bikepath will default to closest known street. This can cause impossible routes.
     May not detect change in road name. Will show where you turned and how long you travel on said road.
-    Will not detect U-turns, This can cause extended milage on road or turn direction other than expected.
     Possibility of time out from Nominatim causing incorrect routing.
         - We have error handling for this mostly working. While the screen
           may be filled with error messages (Depending on the terminal),
@@ -61,7 +70,6 @@ Future possible upgrades:
 
     Store routes and:
     Allow the user to compare routes with friends. This way they can see who does the route is the fastest time.
-    Give approximate burned calorie.
     Compare route to air quality so that a user can determine if they want to take a known route before setting out.
 
     Show interesting locations close to route so that user can plan next route accordingly.
