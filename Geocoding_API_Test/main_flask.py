@@ -36,6 +36,18 @@ def index():
     else:
         return render_template('landing.html')
 #when you view your profile, displays all stores routes
+def alreadyStored(route_name):
+    users = mongo.db.users
+    for key in users.find():
+        str_key = str(key)
+        for i in key:
+            if(i == route_name):
+                author = key.get(i, {}).get('author', 'NA')
+                if(author == session['username']):
+                    return True
+    return False
+
+
 @app.route('/profile')
 def profile():
     users = mongo.db.users
@@ -165,19 +177,7 @@ def plan_route():
         else:
             quality = "Extremely Hazerdous"
         #if this already exists in the database, just display but don't add again
-        if(users.find_one({request.form['route_name'] : {
-        'author' : session['username'],
-        "adresses" : printRoute(route),
-        "profile" : profile,
-        "city" : city,
-        "precipitation" : precipitation,
-        "detailed_precipitation" : detailed_precipitation,
-        "temperature" : str(temperature),
-        "humidity" : str(humidity),
-        "wind_speed" : str(wind_speed),
-        "wind_direction" : str(wind_direction),
-        "quality" : quality,
-        "average_aqi" : average_aqi}})):
+        if(alreadyStored(request.form['route_name'])):
             return render_template('display.html', profile = profile, adresses = printRoute(route), city = city, precipitation = precipitation,
                 detailed_precipitation = detailed_precipitation, temperature = str(temperature), humidity = str(humidity),
                 wind_speed = str(wind_speed), wind_direction = str(wind_direction), quality = quality, average_aqi = average_aqi)

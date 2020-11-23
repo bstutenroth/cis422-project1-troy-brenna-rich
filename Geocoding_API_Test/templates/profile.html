@@ -27,6 +27,11 @@ profile page specific to each user
       </div>
     </div>
     <p>
+      {% for i in test %}
+        {{i}}
+      {% endfor %}
+    </p>
+    <p>
       {% for i in names %}
       <div class = "square">
         <a href="/revisit/{{i}}" id = "i">{{i}}</a>
