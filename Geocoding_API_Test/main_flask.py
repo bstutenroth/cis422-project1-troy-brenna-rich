@@ -78,6 +78,37 @@ def profile():
                 pass
             #li.append(key.get(i, {}).get('author', 'NA'))
     return render_template('profile.html', names = names)
+
+@app.route('/feed')
+def feed():
+    users = mongo.db.users
+    names = []
+    li = []
+    #get all route dictionaries that are belong to the user signed in
+    for key in users.find():
+        str_key = str(key)
+        for i in key:
+            try:
+                author = key.get(i, {}).get('author', 'NA')
+                addresses = key.get(i, {}).get('adresses', 'NA')
+                profile = key.get(i, {}).get('profile', 'NA')
+                public = key.get(i, {}).get('public', 'NA')
+                city = key.get(i, {}).get('city', 'NA')
+                precipitation = key.get(i, {}).get('precipitation', 'NA')
+                detailed_precipitation = key.get(i, {}).get('detailed_precipitation', 'NA')
+                temperature = key.get(i, {}).get('temperature', 'NA')
+                humidity = key.get(i, {}).get('humidity', 'NA')
+                wind_speed = key.get(i, {}).get('wind_speed', 'NA')
+                wind_direction = key.get(i, {}).get('wind_direction', 'NA')
+                quality = key.get(i, {}).get('quality', 'NA')
+                average_aqi = key.get(i, {}).get('average_aqi', 'NA')
+                if(public == 'on'):
+                    names.append(i)
+            except AttributeError:
+                # counters is not a dictionary, ignore and move on
+                pass
+            #li.append(key.get(i, {}).get('author', 'NA'))
+    return render_template('feed.html', names = names)
 #this re-opens stored files and displays the data
 @app.route('/revisit/<div_key>')
 def revisit(div_key):
@@ -147,6 +178,7 @@ def plan_route():
         start = request.form['start']
         dest = request.form['end']
         profile = request.form['profile']
+        public = request.form.get('public')
         coords = route_main(start, dest)
         route = getRoute(coords,profile)
         forecast = getWeather(coords)
@@ -187,6 +219,7 @@ def plan_route():
             'author' : session['username'],
             "adresses" : printRoute(route),
             "profile" : profile,
+            "public" : public,
             "city" : city,
             "precipitation" : precipitation,
             "detailed_precipitation" : detailed_precipitation,

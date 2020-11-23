@@ -24,7 +24,7 @@ html, body {margin: 0; height: 100%}
   text-decoration: none;
   font-family: Andale Mono, monospace;
   font-size: 90%;
-  margin-left: 5%;
+  margin-left: 8%;
   color: white;
   margin-top: 0px;
   top: 0px;
@@ -37,17 +37,17 @@ html, body {margin: 0; height: 100%}
 }
 #home_title{
   margin-left: 8%;
-  font-size: 150%;
+  font-size: 200%;
   color: #AFEEEE;
   font-family: Andale Mono, monospace;
-  margin-left: 8%;
+  margin-left: 10%;
 }
 #nav2{
   text-transform: uppercase;
   text-decoration: none;
   font-family: Andale Mono, monospace;
   font-size: 100%;
-  margin-left: 4%;
+  margin-left: 9%;
   color: white;
 }
 #nav1{
@@ -55,7 +55,7 @@ html, body {margin: 0; height: 100%}
   text-decoration: none;
   font-family: Andale Mono, monospace;
   font-size: 100%;
-  margin-left: 8%;
+  margin-left: 17%;
   color: white;
 }
 #feed{

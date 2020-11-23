@@ -15,7 +15,7 @@ html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
 .dropdown-content {
   display: none;
   position: absolute;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -23,7 +23,7 @@ html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
 /* Links inside the dropdown */
 .dropdown-content a {
   color: white;
-  padding: 12px 16px;
+  padding: 8px 8px;
   text-decoration: none;
   display: block;
   background-color: #4682B4;
@@ -47,8 +47,8 @@ html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
   background-color: #4682B4;
 }
 #img2{
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 95px;
   top: 1px;
   position: absolute;
 }
@@ -79,7 +79,7 @@ html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
   text-transform: uppercase;
   text-decoration: none;
   font-family: Andale Mono, monospace;
-  font-size: 110%;
+  font-size: 100%;
   margin-left: 5%;
   color: white;
 }
@@ -87,13 +87,13 @@ html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
   text-transform: uppercase;
   text-decoration: none;
   font-family: Andale Mono, monospace;
-  font-size: 110%;
-  margin-left: 9%;
+  font-size: 100%;
+  margin-left: 14%;
   color: white;
 }
 #feed{
   text-transform: uppercase;
-  font-size: 110%;
+  font-size: 100%;
   text-decoration: none;
   font-family: Andale Mono, monospace;
   margin-left: 10%;
@@ -148,12 +148,19 @@ html, body {margin: 0; height: 100%; font-family: Arial, Helvetica, sans-serif;}
   margin-left: 5%;
   font-size: 150%;
   position: absolute;
+  text-transform: uppercase;
 }
 #weather{
-  margin-left: 75%;
+  margin-left: 65%;
   font-family: Andale Mono, monospace;
-  width: 20%;
-  height: 30%;
+  width: 25%;
+  height: 70%;
   font-size: 150%;
+  margin-top: 5%;
+  padding-left: 2%;
   position: absolute;
+  background-color: #FF8C3D;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 15px;
 }

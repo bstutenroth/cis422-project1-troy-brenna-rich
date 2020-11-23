@@ -14,14 +14,16 @@ html paage the displays previously routed info
     <div id = "navigation">
       <a href="/"><img id = "img2" src="/static/images/2.JPG"></a>
       <a id="nav1" href="/">HOME</a>
-      <a id="feed">FEED</a>
-        {% if profile == 'driving-car'%}
-          <a id="home_title">Your Drive:</a>
-        {% elif profile == 'cycling-regular'%}
-          <a id="home_title">Your Bike Ride:</a>
-        {% elif profile == "foot-walking"%}
-          <a id="home_title">Your Walk:</a>
-        {%endif%}
+      <a id="feed" href="/feed">FEED</a>
+      {% if profile == 'driving-car'%}
+        <a id="home_title">Your Drive:</a>
+      {% elif profile == 'cycling-regular'%}
+        <a id="home_title">Your Bike Ride:</a>
+      {% elif profile == "foot-walking"%}
+        <a id="home_title">Your Walk:</a>
+      {%else%}
+        <a id="home_title">Your Route:</a>
+      {%endif%}
       <a id = "nav2" href="https://github.com/tclendo/cis422-project1-troy-brenna-rich">GIT HUB</a>
       <a id = "userid">{{session['username']}}</a>
       <div class="dropdown">

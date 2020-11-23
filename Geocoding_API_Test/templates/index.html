@@ -41,7 +41,7 @@ The home page
     <div id = "navigation">
       <a href="/"><img id = "img2" src="static/images/2.JPG"></a>
       <a id="nav1" href="/">HOME</a>
-      <a id="feed">FEED</a>
+      <a id="feed" href="/feed">FEED</a>
       <a id="home_title">BRT-P</a>
       <a id = "nav2" href="https://github.com/tclendo/cis422-project1-troy-brenna-rich">GIT HUB</a>
       <a id = "userid">{{session['username']}}</a>
@@ -89,6 +89,9 @@ The home page
           <p>Enter destination:</p>
           <p><input type="text" name="end"></p>
           <input type="submit" value="Submit">
+          <label>
+            <input type="checkbox" name="public"> make ride public
+          </label>
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
@@ -97,12 +100,12 @@ The home page
       </form>
     </div>
     <a class= "links" onclick="document.getElementById('id03').style.display='block'">
-      <div id = "get_route">
+      <div class = "get_route">
          <p class = "text"> ABOUT YOUR ROUTE </p>
       </div>
     </a>
     <a class = "links" onclick="document.getElementById('id04').style.display='block'">
-      <div id = "plan_route">
+      <div class = "plan_route">
          <p class = "text"> PLAN YOUR ROUTE</p>
       </div>
     </a>
