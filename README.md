@@ -44,6 +44,13 @@ Installation:
     flask_bcrypt
     openrouteservice
 
+API's:
+
+    Currently we have included a file called api_keys.py. These keys are all free and have a limit to them,
+    although the use should be more than plenty for a few users. If you wish to add more information to the
+    'Plan your route' section, feel free to add any other free and safe api keys to that file to be used
+    in routing_main.
+    
 How to Use:
 
     In order to run, make sure docker desktop is open, and running.
