@@ -44,13 +44,6 @@ Installation:
     flask_bcrypt
     openrouteservice
 
-    You will also need various API keys for the different
-    services we're using. 
-
-    **For Professor Young** We will send
-    you the api_keys.py file we used throughout this 
-    project (all of the api keys are free to get and use).
-
 How to Use:
 
     In order to run, make sure docker desktop is open, and running.
