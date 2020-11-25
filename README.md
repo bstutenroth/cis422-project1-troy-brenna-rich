@@ -62,6 +62,12 @@ How to Use:
     docker-compose up
 
     After this, just open up your browser and enter "http://localhost:5000/" to access our website
+    
+Testing:
+    
+    To test the 'plan your route' section, simply change the different parameters to your liking and compare it to other routing applications.
+    
+    To test the 'about your route' section, we have included some test .gpx files that you can use.
 
 Known Issues:
 
